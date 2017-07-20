@@ -1,0 +1,174 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Tekenen!</title>
+  
+  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+  <!-- uncomment lines below to include extra p5 libraries -->
+  <script language="javascript" src="libraries/p5.dom.js"></script>
+  <!--<script language="javascript" src="libraries/p5.sound.js"></script>-->
+  <script language="javascript" type="text/javascript" src="sketch.js"></script>
+  <script language="javascript" type="text/javascript" src="box.js"></script>
+  <script language="javascript" type="text/javascript" src="events.js"></script>
+  <script language="javascript" type="text/javascript" src="buttons.js"></script>
+  
+   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Cookie:regular"]
+      }
+    });
+</script>
+</head>
+
+<body>
+
+<h1> Blanket Drawer</h1>
+
+<output id="process"></output>
+
+<div id='settings'>
+
+<div id='colorDiv'><!-- Kleuren kiezen -->
+<table>
+<tr><td>
+<input id="pickColor" value="Kies kleur" type="button" />
+</td><td>Rood</td><td>
+<input id="redslider" min=0 max=255 value=128 type="range" /></td><td>
+<input id="rednum" min=0 max=255 size="3" value=128 type="number" /></td>
+<td rowspan=3 id="preview"></td></tr>
+<tr><td>
+<input id="pickDefault" value="Standaard kleur" type="button" />
+</td><td>Groen</td><td>
+<input id="greenslider" min=0 max=255 value=128 type="range" /></td><td>
+<input id="greennum" min=0 max=255 size=3 value=128 type="number" /></td></tr>
+<tr><td>
+<input id="setDefault" value="Kies standaard" type="button" />
+</td><td>Blauw</td><td>
+<input id="blueslider" min=0 max=255 value=128 type="range" /></td><td>
+<input id="bluenum" min=0 max=255 size=3 value=128 type="number" /></td></tr>
+</table>
+</div><!-- Kleuren kiezen -->
+
+<div id ="colorPallet">
+<table id"palletTable" border="1" width="90" height="90">
+<tr>
+<td cursor="hand" id="pallet1_C1" class="pallet" >&nbsp;</td>
+<td cursor="hand" id="pallet1_C2" class="pallet" >&nbsp;</td>
+<td cursor="hand" id="pallet1_C3" class="pallet" >&nbsp;</td>
+</tr><tr>
+<td cursor="hand" id="pallet1_C4" class="pallet" >&nbsp;</td>
+<td cursor="hand" id="pallet1_C5" class="pallet" >&nbsp;</td>
+<td cursor="hand" id="pallet1_C6" class="pallet" >&nbsp;</td>
+</tr><tr>
+<td cursor="hand" id="pallet1_C7" class="pallet" >&nbsp;</td>
+<td cursor="hand" id="pallet1_C8" class="pallet" >&nbsp;</td>
+<td cursor="hand" id="pallet1_C9" class="pallet" >&nbsp;</td>
+</tr></table>
+</div>
+<!-- <a href="#" id="pallet_C1">&nbsp;</a> -->
+
+<div id ="colorPallet2">
+<table id"palletTable" border="1" width="90" height="90">
+<tr>
+<td cursor="hand" id="pallet2_C1" class="pallet2" >&nbsp;</td>
+<td cursor="hand" id="pallet2_C2" class="pallet2" >&nbsp;</td>
+<td cursor="hand" id="pallet2_C3" class="pallet2" >&nbsp;</td>
+</tr><tr>
+<td cursor="hand" id="pallet2_C4" class="pallet2" >&nbsp;</td>
+<td cursor="hand" id="pallet2_C5" class="pallet2" >&nbsp;</td>
+<td cursor="hand" id="pallet2_C6" class="pallet2" >&nbsp;</td>
+</tr><tr>
+<td cursor="hand" id="pallet2_C7" class="pallet2" >&nbsp;</td>
+<td cursor="hand" id="pallet2_C8" class="pallet2" >&nbsp;</td>
+<td cursor="hand" id="pallet2_C9" class="pallet2" >&nbsp;</td>
+</tr></table>
+
+<table style="text-align:center; style="float: left;"">
+<tr><td>
+<input id='saveFilePallet' value="Opslaan" type="button" />
+</td></tr><tr><td>
+<input id='loadFilePallet' value="Openen" type="file" name="palletFiles[]" style="display: none;"  accept=".json,application/json" />
+<input value="Openen" onclick="document.getElementById('loadFilePallet').click()"; type="button" />
+</td></tr><tr><td>
+<input id='copyPallet' value="Kopiëren" type="button" />
+</td></tr><tr><td>
+</table>
+
+</div>
+
+<div id='controlDiv'>
+<table style="text-align:center;">
+<tr><td>Zoom</td></tr>
+<tr><td>
+<input id="sizeslider" min=10 max=100 value=30 type="range" />
+</td></tr><tr><td>
+<input id="sizenum" min=10 max=1000 size=4 value=30 type="number" />
+</td></tr></table>
+</div>
+
+<div id='saveDiv'>
+<table style="text-align:center;">
+<tr><td>
+<input id='saveFile' value="Opslaan" type="button" />
+</td></tr><tr><td>
+<input id='loadFile' value="Openen" type="file" name="files[]" style="display: none;"  accept=".json,application/json" />
+<input value="Openen" onclick="document.getElementById('loadFile').click()"; type="button" />
+</td></tr><tr><td>
+<input id='saveIMG' value="IMG opslaan" type="button" />
+</td></tr><tr><td>
+</table>
+</div>
+</div>
+<output id="mode">Normaal</output>
+
+<div id='moreDiv'>
+<a href="#" id="more">Meer...</a>
+</div>
+<div id='extraDiv'>
+<div id='setcolsDiv'>
+<table>
+<tr><td>Kolommen</td><td>
+<input id="numcols" min=1 max=1000 value=10 type="number" /></td></tr>
+<tr><td>Rijen</td><td>
+<input id="numrows" min=1 max=1000 value=20 type="number" /></td></tr>
+<tr><td colspan=2 style="text-align:center;">
+<input id="applyRows" name="Doit" value="Toepassen" type="button" /></td></tr>
+</table>
+</div>
+
+<div id='strokeDiv'>
+<table style="text-align:center;">
+<tr><td colspan=2 >Lijnen</td></tr><tr><td colspan=2>
+<input id="strokeWeigth" min=0 max=25 value=1 type="range" /></td></tr>
+<tr><td>Dikte</td><td>
+<input id="strokeWeigthNum" min=0 max=25 value=1 type="number" /></td></tr>
+</table>
+<table>
+<tr><td>R</td><td>
+<input id="strokeR" min=0 max=255 value=0 type="number" /></td></tr>
+<tr><td>G</td><td>
+<input id="strokeG" min=0 max=255 value=0 type="number" /></td></tr>
+<tr><td>B</td><td>
+<input id="strokeB" min=0 max=255 value=0 type="number" /></td></tr>
+</table>
+</div>
+<div id='lastDiv'>
+<table style="text-align:center;">
+<tr><td>
+<input id="setBG" value="Achtergrond" type="button" /></td></tr>
+<tr><td>
+<input id="reset" value="Reset" type="button" /></td></tr>
+<tr><td>
+<input id="copyRGB" value="Vak -> Lijn" type="button" /></td></tr>
+</table>
+</div>
+</div>
+
+<div id='canvasDiv'></div>
+
+<p id="debug">0</p>
+</body>
+</html>

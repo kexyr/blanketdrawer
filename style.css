@@ -1,0 +1,76 @@
+body {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+div {
+	margin: 5px;
+}
+
+input[type=number] {
+	width: 50px;
+}
+input[type=slider] {
+	width: 160px;
+}
+
+#preview {
+	width: 80px;
+	background-color: #00ff00;
+	border: 1px solid black;
+}
+
+#settings {
+  display: flex;
+}
+#colorDiv {
+  background: lightblue;
+}
+#controlDiv {
+  background: lightgreen;
+}
+#saveDiv {
+	background: orange;
+}
+
+#extraDiv {
+	display: flex;
+}
+#setcolsDiv {
+	background: lightyellow;
+}
+#strokeDiv {
+	background: lightgrey;
+	display: flex;
+}
+
+#lastDiv {
+	background: purple;
+}
+
+#colorPallet {
+	background: pink;
+    display:block;
+    text-decoration:none;
+}
+
+#colorPallet2 {
+	background: yellow;
+    display:block;
+    text-decoration:none;
+}
+
+#colorPallet2>table {
+	float: left;
+}
+
+
+.pallet {
+	cursor: pointer;
+    text-decoration:none;
+}
+
+.pallet2 {
+	cursor: pointer;
+    text-decoration:none;
+	background-color: white;
+}
