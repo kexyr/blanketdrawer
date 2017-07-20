@@ -215,8 +215,9 @@ function doExport() {
 	  }
 	  noStroke();
   }
-  
-	saveCanvas("test.png", "png");
+    
+    var name = "blanket-" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + ".png";
+	saveCanvas(name, "png");
 	scaleUpdate(oldBox);
 }
 
